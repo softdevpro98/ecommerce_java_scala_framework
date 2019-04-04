@@ -1,0 +1,25 @@
+# This file defines all application routes (Higher priority routes first)
+
+GET     /javascriptRoutes           @controllers.Application.javascriptRoutes
+
+
+# Home page
+GET     /                           @controllers.Application.index
+GET     /users                      @controllers.Application.userAdmin
+
+GET     /deleteUser/:id             @controllers.Application.deleteUser(id: Long)
+GET     /makeUserAdmin/:id          @controllers.Application.makeUserAdmin(id: Long)
+
+
+# Categories Pages
+GET		/admin/categories/			@controllers.product.CategoryController.viewAllCategories
+GET		/admin/categories/list			@controllers.product.CategoryController.listCategories
+GET		/admin/categories/view/:id		@controllers.product.CategoryController.viewCategoryForm(id: Long)
+GET		/admin/categories/add			@controllers.product.CategoryController.addCategoryForm
+POST	        /admin/categories/add			@controllers.product.CategoryController.addCategory
+POST	        /admin/categories/update		@controllers.product.CategoryController.updateCategory
+POST	        /admin/categories/delete/:id	        @controllers.product.CategoryController.deleteCategory(id: Long)
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

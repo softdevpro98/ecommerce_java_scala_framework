@@ -1,0 +1,43 @@
+@(categoryForm: Form[dtos.product.CategoryDTO], categoryDTOs: Seq[models.product.Category])(implicit request: play.api.mvc.Request[play.api.mvc.AnyContent])
+
+@import models.product.Category
+@import helper._
+@import views.html.forms.inputHidden
+
+@* The way we access Objects in the views package is different from the way
+ * we would access the same object from another. For ex. In FormHelpers object
+ * the bootstrapVerticalFormFieldConstrutor templates is accessed by
+ * views.html.forms.bootstrapVerticalFormFieldConstrutor instead of 
+ * views.forms.bootstrapVerticalFormFieldConstrutor like here. 
+ *@
+@import views.forms.FormHelpers.bootstrapVerticalFormFieldConstructor
+
+
+@title = @{categoryForm(Category.Id).value.
+						map(_ => Messages("forms.categories.update")).
+						getOrElse(Messages("forms.categories.add"))}
+
+@action = @{categoryForm(Category.Id).value.
+						map(_ => controllers.product.routes.CategoryController.updateCategory()).
+						getOrElse(controllers.product.routes.CategoryController.addCategory())}
+
+@categoryOptions = @{categoryDTOs.map(category => category.id.toString -> category.name)}
+
+@main(title = title) {
+	<div class="col-sm-2">
+		<h2>@title</h2>
+	</div>
+	<div class="col-sm-7">
+		@form(action = action, args = 'class -> "well") {
+			@inputHidden(categoryForm(Category.Id))
+			@inputText(categoryForm(Category.Name), 'class -> "form-control")
+			@select(categoryForm(Category.ParentCategory), categoryOptions,  'class -> "form-control", '_default -> "--- select ---")
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">				 
+					@Messages("forms.save")
+				</button>
+				<a href="@controllers.product.routes.CategoryController.viewAllCategories()" class="btn btn-default">@Messages("forms.cancel")</a>
+			</div>
+		}
+	</div>
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Google Maps</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+      <style>
+        html { height: 100% }
+        body { height: 100%; margin: 0; padding: 0 }
+        #map { height: 100% }
+      </style>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWx-Twf7RfrkAzNd_xrY3b5Yfq8bIARew"></script>
+      <script>
+        function initialize() {
+          	var eiffelTowerLatLng = new google.maps.LatLng(48.858093, 2.294694);
+			var mapOptions = {
+              	center: eiffelTowerLatLng,
+              	mapTypeId: google.maps.MapTypeId.SATELLITE,
+              	zoom: 17,
+              	// Controls the automatic switching behavior for the angle of incidence
+              	// of the map. The only allowed values are 0 and 45. The value 0 causes
+              	// the map to always use a 0° overhead view regardless of the zoom level
+              	// and viewport. The value 45 causes the tilt angle to automatically
+              	// switch to 45 whenever 45° imagery is available for the current zoom level
+              	// and viewport. 45° imagery is only available for SATELLITE and HYBRID
+              	// map types, within some locations, and at some zoom levels.
+              	tilt: 45
+			};
+  			var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+  			var marker = new google.maps.Marker({
+  		    	position: map.getCenter(),
+  		    	draggable:true,
+  		    	animation: google.maps.Animation.DROP,
+		    	map: map,
+  		    	title: 'Eiffel Tower'
+  		  	});
+
+			var infoWindowContent = "<h1>Eiffel Tower</h1><p><a href='https://en.wikipedia.org/wiki/Eiffel_Tower'>" +
+							"See wikipedia for more details</a></p>";
+			var infoWindow = new google.maps.InfoWindow({
+	      		content: infoWindowContent
+	  		});
+
+			google.maps.event.addListener(marker, 'click', function() {
+			  	infoWindow.open(map, marker);
+			});
+			function closeInfoWindow() { infoWindow.close(); }
+			google.maps.event.addListener(map, 'click', closeInfoWindow);
+			google.maps.event.addListener(map, 'center_changed', closeInfoWindow);
+			google.maps.event.addListener(map, 'zoom_changed', closeInfoWindow);
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+      </script>
+   </head>
+   <body>
+      <div id="navbar">
+          <a href="/logout">Logout</a>
+        </div>
+      <div id='map' style="width:100%; height:100%;"></div>
+   </body>
+</html>

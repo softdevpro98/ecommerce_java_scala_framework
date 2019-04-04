@@ -1,0 +1,13 @@
+@(field: play.api.data.Field, args: (Symbol,Any)*)(implicit handler: views.html.helper.FieldConstructor, lang: play.api.i18n.Lang)
+
+@import views.html.helper._
+
+@* Add an additional argument so that our custom FieldConstructor can recognize the
+ * this element as a hidden element and can render it accordingly. *@
+@newArgs = @{('_inputType -> "hidden") +: args}
+
+@* This format is copied over from the default implementation of form elements
+ * in play. For an ex. take a look at inputText.scala.html *@
+@input(field, newArgs.filter(_._1 != 'type):_*) { (id, name, value, htmlArgs) =>
+    <input type="hidden" id="@id" name="@name" value="@value" @toHtmlArgs(htmlArgs)>
+}

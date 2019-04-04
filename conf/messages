@@ -1,0 +1,20 @@
+application.name=Nexanto
+
+menus.logout=Logout
+menus.admin.title=Admin
+menus.admin.categories=Manage Categories
+menus.admin.products=Manage Products
+
+login.title=Login
+
+forms.categories.add=Add Category
+forms.categories.update=Update Category
+
+forms.categories.heading=Categories
+forms.categories.title=Categories
+forms.categories.table.idColumn=Id
+forms.categories.table.nameColumn=Name
+forms.categories.table.parentCategoryColumn=Parent Category
+
+forms.save=Save
+forms.cancel=Cancel

@@ -1,0 +1,15 @@
+@(elements: views.html.helper.FieldElements)
+
+@import play.api.i18n._
+@import views.html.helper._
+
+@if("hidden" equals (elements.args.get('_inputType).getOrElse(null))) {
+	@elements.input
+} else {
+	<div class="@elements.args.get('_class) form-group @if(elements.hasErrors) {has-error}" id="@elements.args.get('_id).getOrElse(elements.id + "_field")">
+    <label for="@elements.id" class="control-label">@elements.label(elements.lang)</label>
+    @elements.input
+    <span class="help-block">@elements.errors(elements.lang).mkString(", ")</span> 
+	</div>
+}
+

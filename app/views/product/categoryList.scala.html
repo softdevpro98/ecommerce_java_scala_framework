@@ -1,0 +1,16 @@
+@()(implicit request: play.api.mvc.Request[play.api.mvc.AnyContent])
+
+@main(title = Messages("forms.categories.heading")) {
+  <div class="col-sm-10" id="">
+    <h2>@Messages("forms.categories.heading")</h2>
+      <table id="categoriesTable" cellspacing="0" cellpadding="0" class="table table-condensed table-striped table-hover">
+      <thead>
+        <tr>
+          <th>@Messages("forms.categories.table.idColumn")</th>
+          <th>@Messages("forms.categories.table.nameColumn")</th>
+          <th>@Messages("forms.categories.table.parentCategoryColumn")</th>
+        </tr>
+      </thead>
+      </table>
+  </div>
+}
